@@ -38,7 +38,6 @@ import {
 import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-
 const formSchema = z.object({
   email: z.string().email({
     message: "Required",
@@ -50,16 +49,6 @@ const formSchema = z.object({
 
 const formRegisterSchema = z.object({
   username: z.string().min(2, {
-    message: "Required",
-  }),
-  password: z
-    .string().min(1, {
-        message: "Required",
-      }),
-});
-
-const formRegisterSchema = z.object({
-  username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
   password: z
@@ -67,13 +56,11 @@ const formRegisterSchema = z.object({
     .min(8, {
       message: "Password must be at least 8 characters.",
     })
-    .regex(
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      "Not Strong enough!"
-    ),
+    .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Not Strong enough!"),
 
   email: z.string().email({ message: "Please enter a valid email" }),
 });
+
 export default function LoginPage() {
   const [isLoading, setIsLoading] = React.useState(false);
   // 1. Define your form.
@@ -157,11 +144,7 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        type="password"
-                        placeholder="password..."
-                        {...field}
-                      />
+                      <Input type="password" placeholder="password..." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -190,11 +173,7 @@ export default function LoginPage() {
                         <FormItem className="grid grid-cols-4 items-center gap-x-4">
                           <FormLabel>Username</FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="username..."
-                              {...field}
-                              className="col-span-3"
-                            />
+                            <Input placeholder="username..." {...field} className="col-span-3" />
                           </FormControl>
                           <FormMessage className="col-start-2 col-span-3 mt-0" />
                         </FormItem>
@@ -241,16 +220,17 @@ export default function LoginPage() {
               </div>
 
               <DialogFooter>
-                <Button
-                  onClick={() => formRegister.handleSubmit(onSubmitRegister)()}
-                >
+                <Button onClick={() => formRegister.handleSubmit(onSubmitRegister)()}>
                   Become a trader
                 </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
-          <Button style={{ width: "100px" }} onClick={() => formLogin.handleSubmit(onSubmitLogin)()}>
-          <div>{isLoading ? <LoadingSpinner className=""/> : "Let's Go"}</div>
+          <Button
+            style={{ width: "100px" }}
+            onClick={() => formLogin.handleSubmit(onSubmitLogin)()}
+          >
+            <div>{isLoading ? <LoadingSpinner className="" /> : "Let's Go"}</div>
           </Button>
         </CardFooter>
       </Card>
