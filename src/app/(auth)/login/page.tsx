@@ -1,5 +1,5 @@
 "use client";
-
+import { Suspense } from "react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,8 +36,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+
 
 const formSchema = z.object({
+  email: z.string().email({
+    message: "Required",
+  }),
+  password: z.string().min(1, {
+    message: "Required",
+  }),
+});
+
+const formRegisterSchema = z.object({
   username: z.string().min(2, {
     message: "Required",
   }),
@@ -64,18 +75,31 @@ const formRegisterSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email" }),
 });
 export default function LoginPage() {
+  const [isLoading, setIsLoading] = React.useState(false);
   // 1. Define your form.
   const formLogin = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmitLogin(values: z.infer<typeof formSchema>) {
+  async function onSubmitLogin(values: z.infer<typeof formSchema>) {
     console.log(values);
+    setIsLoading(true);
+    const res = await fetch("https://api.thefaceon3d.com/api/v1/admin/login/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    setIsLoading(false);
+    console.log("@@@data", data);
   }
 
   // Register dialog
@@ -113,12 +137,12 @@ export default function LoginPage() {
             <form>
               <FormField
                 control={formLogin.control}
-                name="username"
+                name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="username..." {...field} />
+                      <Input placeholder="email..." {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -225,8 +249,8 @@ export default function LoginPage() {
               </DialogFooter>
             </DialogContent>
           </Dialog>
-          <Button onClick={() => formLogin.handleSubmit(onSubmitLogin)()}>
-            Submit
+          <Button style={{ width: "100px" }} onClick={() => formLogin.handleSubmit(onSubmitLogin)()}>
+          <div>{isLoading ? <LoadingSpinner className=""/> : "Let's Go"}</div>
           </Button>
         </CardFooter>
       </Card>
