@@ -1,0 +1,15 @@
+.Card {
+  position: relative;
+}
+
+.Avatar {
+  position: absolute;
+  top: -30px; /* Adjust the value to position it correctly */
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid white; /* You can adjust the border style as needed */
+  border-radius: 50%;
+  width: 70px; /* Adjust the size of the avatar as needed */
+  height: 70px; /* Adjust the size of the avatar as needed */
+  background-color: #f0f0f0; /* Adjust the background color as needed */
+}
