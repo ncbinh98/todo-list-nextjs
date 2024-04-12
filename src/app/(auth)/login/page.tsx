@@ -1,5 +1,4 @@
 "use client";
-import { Suspense } from "react";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,7 +37,7 @@ import {
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { callAPI } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
-
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
   email: z.string().email({
     message: "Required",
@@ -67,6 +66,7 @@ const formRegisterSchema = z.object({
 
 export default function LoginPage() {
   const { toast } = useToast();
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
 
   // 1. Define your form.
@@ -100,6 +100,8 @@ export default function LoginPage() {
       },
     });
     localStorage.setItem("access_token", data.access_token);
+    
+    router.push("/dashboard");
   }
 
   // Register dialog
