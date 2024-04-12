@@ -35,8 +35,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { callAPI } from "@/lib/utils";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -56,13 +57,18 @@ const formRegisterSchema = z.object({
     .min(8, {
       message: "Password must be at least 8 characters.",
     })
-    .regex(/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, "Not Strong enough!"),
+    .regex(
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      "Not Strong enough!"
+    ),
 
   email: z.string().email({ message: "Please enter a valid email" }),
 });
 
 export default function LoginPage() {
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = React.useState(false);
+
   // 1. Define your form.
   const formLogin = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,19 +80,26 @@ export default function LoginPage() {
 
   // 2. Define a submit handler.
   async function onSubmitLogin(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    setIsLoading(true);
-    const res = await fetch("https://api.thefaceon3d.com/api/v1/admin/login/", {
+    const data = await callAPI({
+      url: "admin/login",
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(values),
+      setIsLoading,
+      toast: {
+        toastFn: toast,
+        success: {
+          title: "Success",
+          description: "Login Success",
+          variant: "success",
+        },
+        error: {
+          title: "Error",
+          // description: "Login Failed",
+          variant: "destructive",
+        },
+      },
     });
-    const data = await res.json();
-    setIsLoading(false);
-    console.log("@@@data", data);
+    localStorage.setItem("access_token", data.access_token);
   }
 
   // Register dialog
@@ -144,7 +157,11 @@ export default function LoginPage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input type="password" placeholder="password..." {...field} />
+                      <Input
+                        type="password"
+                        placeholder="password..."
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -173,7 +190,11 @@ export default function LoginPage() {
                         <FormItem className="grid grid-cols-4 items-center gap-x-4">
                           <FormLabel>Username</FormLabel>
                           <FormControl>
-                            <Input placeholder="username..." {...field} className="col-span-3" />
+                            <Input
+                              placeholder="username..."
+                              {...field}
+                              className="col-span-3"
+                            />
                           </FormControl>
                           <FormMessage className="col-start-2 col-span-3 mt-0" />
                         </FormItem>
@@ -220,7 +241,9 @@ export default function LoginPage() {
               </div>
 
               <DialogFooter>
-                <Button onClick={() => formRegister.handleSubmit(onSubmitRegister)()}>
+                <Button
+                  onClick={() => formRegister.handleSubmit(onSubmitRegister)()}
+                >
                   Become a trader
                 </Button>
               </DialogFooter>
@@ -230,7 +253,9 @@ export default function LoginPage() {
             style={{ width: "100px" }}
             onClick={() => formLogin.handleSubmit(onSubmitLogin)()}
           >
-            <div>{isLoading ? <LoadingSpinner className="" /> : "Let's Go"}</div>
+            <div>
+              {isLoading ? <LoadingSpinner className="" /> : "Let's Go"}
+            </div>
           </Button>
         </CardFooter>
       </Card>
