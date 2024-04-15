@@ -11,33 +11,21 @@ export default function Home() {
         <header className="px-4 lg:px-6 h-14 flex items-center">
           <Link className="flex items-center justify-center" href="#">
             {/* <MountainIcon className="h-6 w-6" /> */}
-            
-            <ListTodo size={64} className="mt-5"/>
+
+            <ListTodo size={64} className="mt-5" />
             <span className="sr-only">Acme Inc</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
-              Features
+            <Link className="text-sm font-medium hover:underline underline-offset-4" href="/login">
+              Login
             </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
+            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
               Pricing
             </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
+            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
               About
             </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#"
-            >
+            <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
               Contact
             </Link>
           </nav>
@@ -51,8 +39,8 @@ export default function Home() {
                     Get organized with our Todo List app
                   </h1>
                   <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                    The only to-do list you need. Manage your tasks, organize
-                    your life, and get things done.
+                    The only to-do list you need. Manage your tasks, organize your life, and get
+                    things done.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
@@ -79,17 +67,13 @@ export default function Home() {
                   Experience the workflow the best frontend teams love.
                 </h2>
                 <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Let your team focus on shipping features instead of managing
-                  infrastructure with automated CI/CD.
+                  Let your team focus on shipping features instead of managing infrastructure with
+                  automated CI/CD.
                 </p>
               </div>
               <div className="mx-auto w-full max-w-sm space-y-2">
                 <form className="flex space-x-2">
-                  <Input
-                    className="max-w-lg flex-1"
-                    placeholder="Enter your email"
-                    type="email"
-                  />
+                  <Input className="max-w-lg flex-1" placeholder="Enter your email" type="email" />
                   <Button type="submit">Sign Up</Button>
                 </form>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -108,8 +92,8 @@ export default function Home() {
                   Experience the workflow the best frontend teams love.
                 </h2>
                 <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                  Let your team focus on shipping features instead of managing
-                  infrastructure with automated CI/CD.
+                  Let your team focus on shipping features instead of managing infrastructure with
+                  automated CI/CD.
                 </p>
               </div>
               <div className="flex space-x-4 lg:justify-end">
@@ -150,10 +134,9 @@ export default function Home() {
                     Security
                   </div>
                   <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed dark:text-gray-400">
-                    Fully managed infrastructure designed to scale dynamically
-                    with your traffic, a global edge to ensure your site is fast
-                    for every customer, and the tools to monitor every aspect of
-                    your app.
+                    Fully managed infrastructure designed to scale dynamically with your traffic, a
+                    global edge to ensure your site is fast for every customer, and the tools to
+                    monitor every aspect of your app.
                   </p>
                   <Link
                     className="inline-flex h-9 items-center justify-center rounded-md border border-gray-200 border-gray-200 bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
@@ -171,16 +154,10 @@ export default function Home() {
             © 2024 Acme Inc. All rights reserved.
           </p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-            <Link
-              className="text-xs hover:underline underline-offset-4"
-              href="#"
-            >
+            <Link className="text-xs hover:underline underline-offset-4" href="#">
               Terms of Service
             </Link>
-            <Link
-              className="text-xs hover:underline underline-offset-4"
-              href="#"
-            >
+            <Link className="text-xs hover:underline underline-offset-4" href="#">
               Privacy
             </Link>
           </nav>
