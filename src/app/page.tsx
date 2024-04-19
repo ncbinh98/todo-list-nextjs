@@ -117,7 +117,7 @@ export default function Home() {
               <div className="grid gap-10 sm:px-10 md:gap-16 md:grid-cols-2">
                 <div className="space-y-4">
                   <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800">
-                    Performance
+                    Performance Good choices
                   </div>
                   <h2 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
                     Traffic spikes should be exciting, not scary.
